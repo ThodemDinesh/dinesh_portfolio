@@ -1,7 +1,21 @@
 'use client'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { ExternalLink, Github, Brain, Globe, Database, Bot } from 'lucide-react'
+import { ExternalLink, Github, Brain, Database, Bot } from 'lucide-react'
+
+// ✅ FIXED: Added proper TypeScript interface
+interface Project {
+  id: number
+  title: string
+  description: string
+  image: string
+  tags: string[]
+  category: string
+  icon: React.ComponentType<{ size?: number; className?: string }>
+  github: string
+  live: string
+  color: string
+}
 
 const Projects = () => {
   const [ref, inView] = useInView({
@@ -9,8 +23,8 @@ const Projects = () => {
     threshold: 0.1,
   })
 
-  // Your actual projects from resume
-  const projects = [
+  // ✅ FIXED: Added proper typing to projects array
+  const projects: Project[] = [
     {
       id: 1,
       title: "GenAI Medical Advisor",
@@ -19,8 +33,8 @@ const Projects = () => {
       tags: ["FastAPI", "Streamlit", "LangChain", "ChromaDB", "HuggingFace", "Groq"],
       category: "AI/ML",
       icon: Brain,
-      github: "https://github.com/ThodemDinesh/genai-medical-advisor", // Update with actual links
-      live: "https://genai-medical-advisor.vercel.app", // Update with actual links
+      github: "https://github.com/ThodemDinesh/genai-medical-advisor",
+      live: "https://genai-medical-advisor.vercel.app",
       color: "from-purple-500 to-pink-500"
     },
     {
@@ -31,8 +45,8 @@ const Projects = () => {
       tags: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT", "Context API"],
       category: "Full Stack",
       icon: Database,
-      github: "https://github.com/ThodemDinesh/habittracker_complete_model", // Update with actual links
-      live: "https://habit-tracker-dinesh.vercel.app", // Update with actual links
+      github: "https://github.com/ThodemDinesh/habittracker_complete_model",
+      live: "https://habit-tracker-dinesh.vercel.app",
       color: "from-blue-500 to-cyan-500"
     }
   ]
@@ -127,6 +141,7 @@ const Projects = () => {
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors"
+                      aria-label={`View GitHub repository for ${project.title}`}
                     >
                       <Github size={24} className="text-white" />
                     </motion.a>
@@ -137,6 +152,7 @@ const Projects = () => {
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors"
+                      aria-label={`View live demo for ${project.title}`}
                     >
                       <ExternalLink size={24} className="text-white" />
                     </motion.a>

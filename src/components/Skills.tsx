@@ -357,13 +357,12 @@ import { useInView } from 'react-intersection-observer'
 import { useState, useEffect } from 'react'
 import { 
   SiJavascript, SiPython, SiReact, SiNextdotjs, SiCplusplus, 
-  SiNodedotjs, SiMongodb, SiMysql, SiFastapi, SiStreamlit, SiGit,
-  SiHtml5, SiCss3, SiTailwindcss
+  SiNodedotjs, SiMongodb, SiMysql, SiFastapi, SiStreamlit, SiGit
 } from 'react-icons/si'
 import { FaJava, FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
 import React from 'react'
 
-// Type definitions
+// ✅ FIXED: Proper TypeScript interfaces
 interface Project {
   name: string
   url: string
@@ -372,7 +371,7 @@ interface Project {
 }
 
 interface Skill {
-  icon: React.ComponentType<any>
+  icon: React.ComponentType<{ size?: number; color?: string }>
   name: string
   color: string
   projects?: Project[]

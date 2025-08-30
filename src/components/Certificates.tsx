@@ -202,66 +202,66 @@
 'use client'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { ExternalLink, Award, Calendar, CheckCircle, Eye, Download, X } from 'lucide-react'
+import { Eye, Download, X, Calendar, CheckCircle } from 'lucide-react'
 import { useState } from 'react'
 
 const Certificates = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
-  const [selectedCert, setSelectedCert] = useState<any>(null)
-
-  // Your 4 certificates
-const certificates = [
-  {
-    id: 1,
-    title: "MySQL Implementation Certified Associate",
-    issuer: "Oracle",
-    date: "June 2024",
-    credentialId: "ORACLE-MYSQL-2024-001",
-    image: "🏛️",
-    description: "Demonstrated expertise in MySQL Enterprise Edition including installation, database design, backup, and replication. Proficient in implementing MySQL security, enabling high availability, and monitoring MySQL performance.",
-    skills: ["MySQL", "Database Design", "Performance Tuning", "Security", "Replication"],
-     pdfPath: "/certificates/oracle_certificate.pdf", // ✅ Fixed
-    status: "Active"
-  },
-  {
-    id: 2,
-    title: "Java Full Stack Development Course",
-    issuer: "iamNeo",
-    date: "Jun-Jul 2024",
-    credentialId: "IAMNEO-JAVA-2024-002",
-    image: "☕",
-    description: "Completed comprehensive training in Java, Spring Boot, Angular, HTML5, CSS3, JavaScript, and SQL. Gained foundational knowledge of full-stack development and RESTful API design.",
-    skills: ["Java", "Spring Boot", "Angular", "JavaScript", "SQL", "REST APIs"],
-    pdfPath: "/certificates/iamneo_certificate.pdf", // ✅ Fixed
-    status: "Active"
-  },
-  {
-    id: 3,
-    title: "Cisco AI Certificate",
-    issuer: "Cisco",
-    date: "2024",
-    credentialId: "CISCO-AI-2024-003",
-    image: "🤖",
-    description: "Comprehensive certification covering artificial intelligence fundamentals, machine learning algorithms, and AI implementation in enterprise environments.",
-    skills: ["Artificial Intelligence", "Machine Learning", "Neural Networks", "Data Science", "Python"],
-    pdfPath: "/certificates/cisco_certificate.pdf", // ✅ Fixed
-    status: "Active"
-  },
   
-  {
-    id: 4,
-    title: "Deloitte Data Analytics Certificate",
-    issuer: "Deloitte",
-    date: "2024",
-    credentialId: "DELOITTE-DA-2024-004",
-    image: "📊",
-    description: "Advanced data analytics certification covering statistical analysis, data visualization, business intelligence, and strategic data-driven decision making.",
-    skills: ["Data Analytics", "Statistical Analysis", "Business Intelligence", "Data Visualization", "Excel", "Tableau"],
-    pdfPath: "/certificates/delloite_certificatedataanalytics.pdf", // ✅ Fixed
-    status: "Active"
-  }
-]
+  // Your 4 certificates
+  const certificates = [
+    {
+      id: 1,
+      title: "MySQL Implementation Certified Associate",
+      issuer: "Oracle",
+      date: "June 2024",
+      credentialId: "ORACLE-MYSQL-2024-001",
+      image: "🏛️",
+      description: "Demonstrated expertise in MySQL Enterprise Edition including installation, database design, backup, and replication. Proficient in implementing MySQL security, enabling high availability, and monitoring MySQL performance.",
+      skills: ["MySQL", "Database Design", "Performance Tuning", "Security", "Replication"],
+      pdfPath: "/certificates/oracle_certificate.pdf",
+      status: "Active"
+    },
+    {
+      id: 2,
+      title: "Java Full Stack Development Course",
+      issuer: "iamNeo",
+      date: "Jun-Jul 2024",
+      credentialId: "IAMNEO-JAVA-2024-002",
+      image: "☕",
+      description: "Completed comprehensive training in Java, Spring Boot, Angular, HTML5, CSS3, JavaScript, and SQL. Gained foundational knowledge of full-stack development and RESTful API design.",
+      skills: ["Java", "Spring Boot", "Angular", "JavaScript", "SQL", "REST APIs"],
+      pdfPath: "/certificates/iamneo_certificate.pdf",
+      status: "Active"
+    },
+    {
+      id: 3,
+      title: "Cisco AI Certificate",
+      issuer: "Cisco",
+      date: "2024",
+      credentialId: "CISCO-AI-2024-003",
+      image: "🤖",
+      description: "Comprehensive certification covering artificial intelligence fundamentals, machine learning algorithms, and AI implementation in enterprise environments.",
+      skills: ["Artificial Intelligence", "Machine Learning", "Neural Networks", "Data Science", "Python"],
+      pdfPath: "/certificates/cisco_certificate.pdf",
+      status: "Active"
+    },
+    {
+      id: 4,
+      title: "Deloitte Data Analytics Certificate",
+      issuer: "Deloitte",
+      date: "2024",
+      credentialId: "DELOITTE-DA-2024-004",
+      image: "📊",
+      description: "Advanced data analytics certification covering statistical analysis, data visualization, business intelligence, and strategic data-driven decision making.",
+      skills: ["Data Analytics", "Statistical Analysis", "Business Intelligence", "Data Visualization", "Excel", "Tableau"],
+      pdfPath: "/certificates/delloite_certificatedataanalytics.pdf",
+      status: "Active"
+    }
+  ]
 
+  // ✅ FIXED: Proper TypeScript typing instead of 'any'
+  const [selectedCert, setSelectedCert] = useState<typeof certificates[0] | null>(null)
 
   return (
     <section id="certificates" className="section-padding bg-gray-800">
@@ -328,13 +328,9 @@ const certificates = [
 
                 {/* Action Buttons */}
                 <div className="border-t border-gray-700 pt-4">
-                  {/* <div className="text-xs text-gray-500 mb-3">
-                    Credential ID: {cert.credentialId}
-                  </div> */}
-                  
                   <div className="flex gap-3">
                     <motion.button
-                      onClick={() => setSelectedCert(cert)} // 👈 This opens the modal
+                      onClick={() => setSelectedCert(cert)}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       className="flex items-center gap-2 px-4 py-2 bg-cyan-500 text-black rounded-lg hover:bg-cyan-400 transition-colors text-sm font-medium"
@@ -359,22 +355,22 @@ const certificates = [
             ))}
           </div>
 
-          {/* PDF Viewer Modal - This is the magic! ✨ */}
+          {/* PDF Viewer Modal */}
           <AnimatePresence>
-            {selectedCert && ( // 👈 Only shows when certificate is selected
+            {selectedCert && (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-                onClick={() => setSelectedCert(null)} // 👈 Click backdrop to close
+                onClick={() => setSelectedCert(null)}
               >
                 <motion.div
                   initial={{ scale: 0.8, y: 50 }}
                   animate={{ scale: 1, y: 0 }}
                   exit={{ scale: 0.8, y: 50 }}
                   className="bg-gray-800 rounded-2xl w-full max-w-5xl h-[90vh] flex flex-col border border-cyan-500/30"
-                  onClick={(e) => e.stopPropagation()} // 👈 Prevent closing when clicking modal content
+                  onClick={(e: React.MouseEvent) => e.stopPropagation()} // ✅ FIXED: Added proper type
                 >
                   {/* Modal Header */}
                   <div className="flex items-center justify-between p-6 border-b border-gray-700">
@@ -383,17 +379,17 @@ const certificates = [
                       <p className="text-gray-400">{selectedCert.issuer}</p>
                     </div>
                     <button
-                      onClick={() => setSelectedCert(null)} // 👈 Close button
+                      onClick={() => setSelectedCert(null)}
                       className="p-2 text-gray-400 hover:text-white transition-colors"
                     >
                       <X size={24} />
                     </button>
                   </div>
 
-                  {/* PDF Viewer - This displays your actual PDF! */}
+                  {/* PDF Viewer */}
                   <div className="flex-1 p-6">
                     <iframe
-                      src={selectedCert.pdfPath} // 👈 Your PDF file path
+                      src={selectedCert.pdfPath}
                       className="w-full h-full rounded-lg border border-gray-600"
                       title={`${selectedCert.title} Certificate`}
                     />
