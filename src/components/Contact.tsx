@@ -13,6 +13,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
   const [status, setStatus] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  // ✅ REMOVED: unused 'error' variable that was causing the warning
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -37,7 +38,7 @@ const Contact = () => {
       if (data.success) {
         setStatus('success')
         setFormData({ name: '', email: '', subject: '', message: '' })
-        setTimeout(() => setStatus(''), 6000) // Reduced from 8000
+        setTimeout(() => setStatus(''), 6000)
       } else {
         setStatus('error')
         setTimeout(() => setStatus(''), 5000)
@@ -77,7 +78,7 @@ const Contact = () => {
         className="text-2xl font-bold text-green-400 mb-3"
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 0.4 }} // Much faster
+        transition={{ delay: 0.8, duration: 0.4 }}
       >
         Great to Connect! 🎉
       </motion.h4>
@@ -86,7 +87,7 @@ const Contact = () => {
         className="text-green-300/80 mb-4 max-w-md mx-auto"
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.0, duration: 0.4 }} // Smoother timing
+        transition={{ delay: 1.0, duration: 0.4 }}
       >
         Your message has been sent successfully. Looking forward to our conversation!
       </motion.p>
@@ -99,7 +100,7 @@ const Contact = () => {
         transition={{ delay: 1.2, type: "spring", duration: 0.4 }}
       >
         <CheckCircle className="text-green-400" size={18} />
-        <span className="text-green-400 text-sm font-medium">I'll respond within 24 hours</span>
+        <span className="text-green-400 text-sm font-medium">I&apos;ll respond within 24 hours</span>
       </motion.div>
     </motion.div>
   )

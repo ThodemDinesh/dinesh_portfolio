@@ -38,7 +38,7 @@ const Hero = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            <span className="text-white">Hi, I'm </span>
+            <span className="text-white">Hi, I&apos;m </span>
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-extrabold">
               Dinesh
             </span>
