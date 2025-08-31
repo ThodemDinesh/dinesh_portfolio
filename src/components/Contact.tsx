@@ -384,7 +384,7 @@ interface FormData {
 type StatusType = '' | 'sending' | 'success' | 'error'
 
 interface ContactItem {
-  icon: any
+   icon: React.ComponentType<{ size?: number; className?: string }> 
   label: string
   value: string
   href: string
